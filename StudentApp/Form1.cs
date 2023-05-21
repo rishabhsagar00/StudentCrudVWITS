@@ -109,7 +109,7 @@ namespace StudentApp
                 dataGridView1.DataSource = bs;
                 dataGridView1.Visible = true;
                 // display();
-                MessageBox.Show("All records are here to edit");
+                MessageBox.Show("All records are here");
             }
 
             }
@@ -146,6 +146,11 @@ namespace StudentApp
             con.Close();
             clearData();
             MessageBox.Show("Student Details updated successfully");
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
