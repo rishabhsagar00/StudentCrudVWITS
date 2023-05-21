@@ -1,0 +1,11 @@
+E:\Webforms\StudentApp\StudentApp\obj\Debug\StudentApp.csproj.AssemblyReference.cache
+E:\Webforms\StudentApp\StudentApp\obj\Debug\StudentApp.csproj.SuggestedBindingRedirects.cache
+E:\Webforms\StudentApp\StudentApp\obj\Debug\StudentApp.Form1.resources
+E:\Webforms\StudentApp\StudentApp\obj\Debug\StudentApp.Properties.Resources.resources
+E:\Webforms\StudentApp\StudentApp\obj\Debug\StudentApp.csproj.GenerateResource.cache
+E:\Webforms\StudentApp\StudentApp\obj\Debug\StudentApp.csproj.CoreCompileInputs.cache
+E:\Webforms\StudentApp\StudentApp\bin\Debug\StudentApp.exe.config
+E:\Webforms\StudentApp\StudentApp\bin\Debug\StudentApp.exe
+E:\Webforms\StudentApp\StudentApp\bin\Debug\StudentApp.pdb
+E:\Webforms\StudentApp\StudentApp\obj\Debug\StudentApp.exe
+E:\Webforms\StudentApp\StudentApp\obj\Debug\StudentApp.pdb
