@@ -1,0 +1,12 @@
+C:\Users\Shubham\source\repos\bookstoreapp\datalayer\bin\Debug\datalayer.dll
+C:\Users\Shubham\source\repos\bookstoreapp\datalayer\bin\Debug\datalayer.pdb
+C:\Users\Shubham\source\repos\bookstoreapp\datalayer\obj\Debug\datalayer.csproj.AssemblyReference.cache
+C:\Users\Shubham\source\repos\bookstoreapp\datalayer\obj\Debug\datalayer.csproj.CoreCompileInputs.cache
+C:\Users\Shubham\source\repos\bookstoreapp\datalayer\obj\Debug\datalayer.dll
+C:\Users\Shubham\source\repos\bookstoreapp\datalayer\obj\Debug\datalayer.pdb
+E:\Dotnet Training\crud-asp.net-main\crud-asp.net-main\bookstoreapp\datalayer\bin\Debug\datalayer.dll
+E:\Dotnet Training\crud-asp.net-main\crud-asp.net-main\bookstoreapp\datalayer\bin\Debug\datalayer.pdb
+E:\Dotnet Training\crud-asp.net-main\crud-asp.net-main\bookstoreapp\datalayer\obj\Debug\datalayer.csproj.AssemblyReference.cache
+E:\Dotnet Training\crud-asp.net-main\crud-asp.net-main\bookstoreapp\datalayer\obj\Debug\datalayer.csproj.CoreCompileInputs.cache
+E:\Dotnet Training\crud-asp.net-main\crud-asp.net-main\bookstoreapp\datalayer\obj\Debug\datalayer.dll
+E:\Dotnet Training\crud-asp.net-main\crud-asp.net-main\bookstoreapp\datalayer\obj\Debug\datalayer.pdb

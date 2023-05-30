@@ -1,0 +1,18 @@
+C:\Users\Shubham\source\repos\bookstoreapp\applicationLayer1\bin\Debug\applicationLayer1.dll
+C:\Users\Shubham\source\repos\bookstoreapp\applicationLayer1\bin\Debug\applicationLayer1.pdb
+C:\Users\Shubham\source\repos\bookstoreapp\applicationLayer1\bin\Debug\datalayer.dll
+C:\Users\Shubham\source\repos\bookstoreapp\applicationLayer1\bin\Debug\datalayer.pdb
+C:\Users\Shubham\source\repos\bookstoreapp\applicationLayer1\obj\Debug\applicationLayer1.csproj.AssemblyReference.cache
+C:\Users\Shubham\source\repos\bookstoreapp\applicationLayer1\obj\Debug\applicationLayer1.csproj.CoreCompileInputs.cache
+C:\Users\Shubham\source\repos\bookstoreapp\applicationLayer1\obj\Debug\applicationLayer1.csproj.CopyComplete
+C:\Users\Shubham\source\repos\bookstoreapp\applicationLayer1\obj\Debug\applicationLayer1.dll
+C:\Users\Shubham\source\repos\bookstoreapp\applicationLayer1\obj\Debug\applicationLayer1.pdb
+E:\Dotnet Training\crud-asp.net-main\crud-asp.net-main\bookstoreapp\applicationLayer1\bin\Debug\applicationLayer1.dll
+E:\Dotnet Training\crud-asp.net-main\crud-asp.net-main\bookstoreapp\applicationLayer1\bin\Debug\applicationLayer1.pdb
+E:\Dotnet Training\crud-asp.net-main\crud-asp.net-main\bookstoreapp\applicationLayer1\bin\Debug\datalayer.dll
+E:\Dotnet Training\crud-asp.net-main\crud-asp.net-main\bookstoreapp\applicationLayer1\bin\Debug\datalayer.pdb
+E:\Dotnet Training\crud-asp.net-main\crud-asp.net-main\bookstoreapp\applicationLayer1\obj\Debug\applicationLayer1.csproj.AssemblyReference.cache
+E:\Dotnet Training\crud-asp.net-main\crud-asp.net-main\bookstoreapp\applicationLayer1\obj\Debug\applicationLayer1.csproj.CoreCompileInputs.cache
+E:\Dotnet Training\crud-asp.net-main\crud-asp.net-main\bookstoreapp\applicationLayer1\obj\Debug\applicationLayer1.csproj.CopyComplete
+E:\Dotnet Training\crud-asp.net-main\crud-asp.net-main\bookstoreapp\applicationLayer1\obj\Debug\applicationLayer1.dll
+E:\Dotnet Training\crud-asp.net-main\crud-asp.net-main\bookstoreapp\applicationLayer1\obj\Debug\applicationLayer1.pdb
