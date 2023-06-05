@@ -1,0 +1,23 @@
+﻿
+@model List<LibraryManagementSystem.Models.Book>
+
+<h2>Books</h2>
+
+<table class="table">
+    <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Publication Date</th>
+        <th>Is Available</th>
+    </tr>
+
+    @foreach (var book in Model)
+    {
+        <tr>
+            <td>@book.Title</td>
+            <td>@book.Author</td>
+            <td>@book.PublicationDate</td>
+            <td>@(book.IsAvailable ? "Yes" : "No")</td>
+        </tr>
+    }
+</table>
