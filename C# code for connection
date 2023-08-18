@@ -1,0 +1,115 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Data;
+using Npgsql; // Npgsql is a popular .NET library for PostgreSQL
+
+namespace YourNamespace
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string filePath = "C:/Task/samplefile.txt";
+            ProcessFile(filePath);
+        }
+
+        static NpgsqlConnection EstablishedConnection()
+        {
+            try
+            {
+                string connString = "Host=razur;Port=7777;Username=tt;Password=pass;Database=tt;";
+                NpgsqlConnection connection = new NpgsqlConnection(connString);
+                connection.Open();
+                return connection;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error while connecting to the database: " + e.Message);
+                return null;
+            }
+        }
+
+        static void InsertDataAK0(NpgsqlConnection connection, string VYROBEKVOZ_OZN, string PP_SERVIS_NR, string TEXT, string ZAZNAM_ID)
+        {
+            try
+            {
+                using (var cmd = new NpgsqlCommand("INSERT INTO \"PPSERVICES\"(\"VYROBEKVOZ_OZN\", \"PP_SERVIS_NR\", \"TEXT\", \"ZAZNAM_ID\") VALUES (@VYROBEKVOZ_OZN, @PP_SERVIS_NR, @TEXT, @ZAZNAM_ID)", connection))
+                {
+                    cmd.Parameters.AddWithValue("VYROBEKVOZ_OZN", VYROBEKVOZ_OZN);
+                    cmd.Parameters.AddWithValue("PP_SERVIS_NR", PP_SERVIS_NR);
+                    cmd.Parameters.AddWithValue("TEXT", TEXT);
+                    cmd.Parameters.AddWithValue("ZAZNAM_ID", ZAZNAM_ID);
+                    cmd.ExecuteNonQuery();
+                }
+                Console.WriteLine("AK0 Data Inserted Successfully");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error while inserting AK0 data: " + e.Message);
+            }
+        }
+
+        static void ProcessFile(string filePath)
+        {
+            using (NpgsqlConnection connection = EstablishedConnection())
+            {
+                if (connection == null)
+                    return;
+
+                using (StreamReader reader = new StreamReader(filePath))
+                {
+                    int count = 0;
+                    string line;
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        count++;
+                        string VYROBEKVOZ_135_171 = line.Substring(135, 171).Trim();
+                        string table_pos_26_28 = line.Substring(26, 2).Trim();
+                        string PP_SERVIS_NR = line.Substring(6, 4);
+                        string TEXT = line.Substring(56, 39);
+                        string ZAZNAM_ID = "-1";
+                        string PP_DRUH_value = line.Substring(10, 2);
+                        PP_DRUH_value = PP_DRUH_value.Trim();
+
+                        NpgsqlCommand cmd = new NpgsqlCommand("SELECT \"PP_DRUH\", \"TEXT\" FROM \"PPDRUH_NEW\" WHERE \"PP_DRUH\" = @PP_DRUH", connection);
+                        cmd.Parameters.AddWithValue("PP_DRUH", PP_DRUH_value);
+                        NpgsqlDataReader reader = cmd.ExecuteReader();
+                        string TEXT_value = "";
+                        while (reader.Read())
+                        {
+                            TEXT_value = reader["TEXT"].ToString();
+                        }
+                        reader.Close();
+
+                        TEXT = TEXT.Replace(TEXT_value, "");
+
+                        string VYROBEKVOZ_OZN;
+                        if (Brand.Contains(VYROBEKVOZ_135_171) || Table_brand_Pos.Contains(table_pos_26_28))
+                        {
+                            VYROBEKVOZ_OZN = "V";
+                        }
+                        else
+                        {
+                            VYROBEKVOZ_OZN = "Z";
+                        }
+
+                        // Rest of your AK0 processing and insertion logic...
+
+                        InsertDataAK0(connection, VYROBEKVOZ_OZN, PP_SERVIS_NR, TEXT, ZAZNAM_ID);
+                    }
+                }
+            }
+        }
+
+        static List<string> Brand = new List<string>
+        {
+            // Add your brand names here...
+        };
+
+        static List<string> Table_brand_Pos = new List<string>
+        {
+            // Add your table brand positions here...
+        };
+    }
+}
