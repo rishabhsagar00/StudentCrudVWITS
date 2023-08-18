@@ -1,0 +1,220 @@
+import psycopg2
+import time
+from functools import lru_cache
+
+start_time = time.time()
+
+@lru_cache(maxsize = None)
+def established_connection():
+     try: 
+          connection =  psycopg2.connect(
+            database = "tt",                    
+            user = "tt",
+            password = "pass",
+            host = "razur",
+            port = 7777
+        )
+          return connection
+     except psycopg2.Error as e:
+          print("Error while connecting to the data" , e)
+          return None
+     
+
+
+Brand = (
+            "POLO MOD.82->94",
+            "GOLF/JETTA MOD.74->/CABRIOLET-> MOD. 93", 
+            "SCIROCCO MOD.84->92",
+            "PASSAT MOD.81-> 88/SANTANA",
+            "GOLF/JETTA MOD. 84->91",
+            "PASSAT  MOD. 88->97",
+            "CORRADO MOD.89->95",
+            "GOLF/VENTO 92->99/VARIANT 93->99",
+            "GOLF CABRIOLET  MOD. 94->03",
+            "POLO  MOD. 95->02",
+            "SHARAN  MOD. 96->2003",
+            "SHARAN  MOD. 04->11",
+            "POLO  CLASSIC 96->03/VARIANT 97->03",
+            "PASSAT/VARIANT MOD.97->2000",
+            "PASSAT/VARIANT  MOD.01->05",
+            "GOLF MOD.98->04/VARIANT MOD.99->06",
+            "LUPO MOD.97->",
+            "BORA/VARIANT MOD.99->07",
+            "LUPO 3L MOD.99->",
+            "POLO MOD.02->10/POLO SA MOD.10->",
+            "PHAETON MOD.03 ->",
+            "TOUAREG MOD.03->",
+            "TOURAN MOD.03->11",
+            "GOLF 5 MOD.04->09",
+            "GOLF PLUS MOD.05->14",
+            "PASSAT/Variant B6 MOD.06->11",
+            "EOS MOD.06->",
+            "TIGUAN MOD.08->19",
+            "PASSAT CC MOD.09->/CC MOD.10->",
+            "SCIROCCO MOD.09->",
+            "GOLF 6 MOD.09->13",
+            "POLO MOD.10->",
+            "TOUAREG MOD.11->18",
+            "TOURAN MOD.11->15",
+            "SHARAN MOD.11->",
+            "PASSAT / VARIANT MOD.11->15",
+            "GOLF CABRIOLET MOD.12->",
+            "UP MOD.12->",
+            "GOLF MOD.13->20",
+            "XL1 MOD.13->",
+            "GOLF VARIANT MOD.14->",
+            "GOLF SPORTSVAN MOD.14->",
+            "PASSAT MOD.15->",
+            "TOURAN MOD.16->",
+            "TIGUAN MOD.16->",
+            "ARTEON MOD.17->",
+            "POLO MOD.18->/TAIGO MOD.22->",
+            "T-ROC MOD.18->",
+            "TOUAREG MOD.18->",
+            "T-CROSS MOD.19->/TAIGUN MOD.22->",
+            "T-CROSS MOD.19->",
+            "GOLF MOD.20->/VARIANT MOD.21->",
+            "ID.3 MOD.20->",
+            "T-ROC CABRIOLET MOD.20->",
+            "ID.4 MOD.20->/ID.5 MOD.22->"
+            )
+Table_brand_Pos = ("08","13","14","17","18","21","22","26","29","32","35","1E","37","41","1D","43","45","47","48","1A","58","59","61","68","1B","1C","1G",
+                "1H","1I","1J","1K","1L","1M","1N","1O","1P","1R","1S","1T","1U","1V","1W","1X","1Y","1Z","4A","4B","4C","4D","4E","4F","4G","4H","4I")
+@lru_cache(maxsize = None)
+def insert_data_AK0(connection ,VYROBEKVOZ_OZN , PP_SERVIS_NR ,TEXT , ZAZNAM_ID ):
+        
+        try:
+            cursor = connection.cursor()
+
+            cursor.execute('INSERT INTO uat90000."PPSERVICES"("VYROBEKVOZ_OZN" ,"PP_SERVIS_NR" , "TEXT","ZAZNAM_ID" ) VALUES (%s ,%s, %s , %s);' , (VYROBEKVOZ_OZN , PP_SERVIS_NR , TEXT , ZAZNAM_ID))
+            connection.commit()
+            # cursor.close()
+            # connection.close()
+
+            print("AK0 Data Inserted Successfully")
+        except psycopg2.Error as e:
+             print("Error While Inserting Data" , e)
+@lru_cache(maxsize = None)
+def insert_data_AK1(DPH_SZB_OZN , TABLPOZICE , CAS_JDN_POC, LAK_JDN_POC, PP_NR, VYROBEKVOZ_OZN, STRNAKLTYP_OZN, SAC_CODE):
+     try:
+          connection = established_connection()
+          cursor = connection.cursor()
+          cursor.execute('INSERT INTO uat90000."PPNR_NEW"("DPH_SZB_OZN" , "TABLPOZICE" , "CAS_JDN_POC" ,"LAK_JDN_POC" , "PP_NR" , "VYROBEKVOZ_OZN" ,"STRNAKLTYP_OZN" ,"SAC_CODE") VALUES(%s, %s, %s, %s, %s, %s, %s , %s);' , (DPH_SZB_OZN , TABLPOZICE , CAS_JDN_POC , LAK_JDN_POC , PP_NR, VYROBEKVOZ_OZN, STRNAKLTYP_OZN , SAC_CODE))
+          connection.commit()
+          print(" AK1 Data Insertes Successfully")
+     except psycopg2.Error as e :
+          print("Error while inserting AK1 data " , e)
+
+# def Chech_Text_remove(text):
+     # PP_DRUH_value = line[10:12]
+     # PP_DRUH_value = str(PP_DRUH_value)
+
+
+
+@lru_cache(maxsize = None)
+def process_file(file_path):
+    connection = established_connection()
+    if connection is None:
+         return
+    with open('C:/Task/DGQ.R11I1E.A0090A.D230427.T101448' , "r") as file:
+#     with open(file_path , 'r') as file:
+        count = 0
+        for line in file:
+            count = count+1
+            VYROBEKVOZ_135_171 = line[136:171].strip()
+            table_pos_26_28 = line[26:28].strip()
+            PP_SERVIS_NR = line[6:10]
+            TEXT = line[56:95]
+            ZAZNAM_ID = "-1"
+            PP_DRUH_value = line[10:12]
+            PP_DRUH_value = str(PP_DRUH_value)
+            cursor = connection.cursor()
+            query = f'SELECT "PP_DRUH" , "TEXT" FROM uat90000."PPDRUH_NEW" WHERE "PP_DRUH" = %s'
+            cursor.execute(query , (PP_DRUH_value,))
+            result = cursor.fetchone()
+            print(result)
+            TEXT_value = result[1]
+            print(TEXT_value)
+            TEXT = TEXT.replace(TEXT_value ,'')
+            print(TEXT)
+            # if any(brand_name in VYROBEKVOZ_135_171 for brand_name in Brand):
+            #     VYROBEKVOZ_OZN = "VW"
+            # else:
+            #     VYROBEKVOZ_OZN = "V"
+            if VYROBEKVOZ_135_171 in Brand or table_pos_26_28 in Table_brand_Pos:
+                VYROBEKVOZ_135_171 = "V"
+                VYROBEKVOZ_OZN = VYROBEKVOZ_135_171
+            else:
+                VYROBEKVOZ_OZN = "Z"
+
+          #   VYROBEKVOZ_OZN = 'V'
+          #   PP_SERVIS_NR = line[7:11]
+          #   TEXT = line[56:95].replace('.' , '')
+          #   ZAZNAM_ID = "-1"
+
+
+# ___AK1 columns_____________________________________________________________________
+            DPH_SZB_OZN = 0
+            TABLPOZICE = line[26:28]
+            CAS_JDN_POC = line[45:49]
+            LAK_JDN_POC = 0
+            PP_NR = line[6:14]
+          #   VYROBEKVOZ_OZN = "V"
+            STRNAKLTYP_OZN = 1
+            SAC_CODE = 998729
+          #   ZAZNAM_ID = -1
+
+#_________________________________________________________
+
+
+
+            if line.startswith('AK0'):
+                 print("Read AK0 Line No : " , count)
+                 cursor = connection.cursor()
+                 cursor.execute('SELECT COUNT(*) FROM uat90000."PPSERVICES" WHERE "VYROBEKVOZ_OZN" = %s AND "PP_SERVIS_NR" = %s' , (VYROBEKVOZ_OZN , PP_SERVIS_NR))
+                 existing_row = cursor.fetchone()[0]
+
+                 if existing_row == 0:
+                      insert_data_AK0(connection , VYROBEKVOZ_OZN , PP_SERVIS_NR , TEXT , ZAZNAM_ID)
+                      connection.commit()
+                 else:
+                      print("Data with same key" ,VYROBEKVOZ_OZN ,PP_SERVIS_NR ,"already exist")
+
+            
+
+# ______________________________________
+
+#######     """if line.startswith('AK1'):
+          #        cursor = connection.cursor()
+          #        insert_data_AK1(DPH_SZB_OZN, TABLPOZICE , CAS_JDN_POC, LAK_JDN_POC, PP_NR, VYROBEKVOZ_OZN, STRNAKLTYP_OZN, SAC_CODE)
+          #        connection.commit()"""""""""""""""""""""""""""
+          #      #   cursor = connection.cursor()
+          #      #   with connection.cursor() as cursor:
+          #        cursor.execute('SELECT COUNT(*) FROM uat90000."PPNR_NEW" WHERE "ZAZNAM_ID" = %s' ,(ZAZNAM_ID))
+          #      #   cursor.execute('SELECT COUNT(*) FROM uat90000."PPNR_NEW" WHERE "PP_NR" = %s' ,(PP_NR))
+          #        existing_row = cursor.fetchone()
+
+          #        if existing_row == 0:
+          #             insert_data_AK1(connection , TABLPOZICE, CAS_JDN_POC , LAK_JDN_POC, PP_NR , VYROBEKVOZ_OZN , STRNAKLTYP_OZN , SAC_CODE)
+          #           #   insert_data(connection , VYROBEKVOZ_OZN , PP_SERVIS_NR , TEXT , ZAZNAM_ID)
+          #             connection.commit()
+          #   else:
+          #      print("Data with same key already exist")
+
+
+
+
+
+# _____________________________________________
+
+    connection.close()
+    
+if __name__ == "__main__":
+    file_path = "C:/Task/samplefile.txt"
+    # connection_string = "Server=phoenix-northeu-dev-db.postgres.database.azure.com;Port=5432;Username=phoenixdevuser;Password=Ph0En!XdBu$er;Database=phoenix_dev;Ssl"
+    # data_to_insert = read_data_from_file(file_path)
+    # insert_data_into_postgre(data_to_insert)
+    process_file(file_path)
+end_time = time.time()
+final_time = end_time - start_time
+print("Time Taken : " , final_time)        
